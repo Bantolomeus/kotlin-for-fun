@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.HashMap
 
 @RestController
 class DistributionCreatorController {
@@ -20,18 +19,4 @@ class DistributionCreatorController {
         return distributionModel.createDistribution(range, invocations)
     }
 
-    private fun distributeTheNumbers(range: Int?, invocations: Long?): Map<Int, Long> {
-
-        val distribution = HashMap<Int, Long>()
-
-        val catchTheNumbers = DistributionCreatorController()
-
-        for (j in 0..invocations!! - 1) {
-            val retrievedNumber = catchTheNumbers.fetchThemAll(range)
-
-            distribution.put(retrievedNumber!!, (distribution as Map<Int, Long>).getOrDefault(retrievedNumber, 0L) + 1L)
-        }
-
-        return distribution
-    }
 }
