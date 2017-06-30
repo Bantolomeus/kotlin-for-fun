@@ -1,23 +1,20 @@
 package com.bantolomeus.model
 
-import com.bantolomeus.controller.DistributionCreatorController
-import java.util.HashMap
+import java.util.Random
 
 open class DistributionCreatorModel {
 
     fun createDistribution(range: Int, invocations: Long): Map<Int, Long> {
 
         val distribution = HashMap<Int, Long>()
-
-        val catchTheNumbers = DistributionCreatorController()
+        val random = Random()
 
         for (j in 0..invocations - 1) {
-            val retrievedNumber = catchTheNumbers.fetchThemAll(range)
 
-            // TODO: remove this
-            distribution.put(retrievedNumber!!, (distribution as Map<Int, Long>).getOrDefault(retrievedNumber, 0L) + 1L)
+            val randomNumber = random.nextInt(range)
+
+            distribution.put(randomNumber, (distribution as Map<Int, Long>).getOrDefault(randomNumber, 0L) + 1L)
         }
-
         return distribution
     }
 }
