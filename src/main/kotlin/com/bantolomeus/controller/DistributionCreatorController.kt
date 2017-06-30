@@ -11,14 +11,6 @@ import java.util.HashMap
 @RestController
 class DistributionCreatorController {
 
-    @RequestMapping(path = arrayOf("/fetch"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    fun fetchThemAll(@RequestParam(value = "range", required = false, defaultValue = "10") range: Int?): Int? {
-
-        val randomNumberController = RandomNumberController()
-
-        return randomNumberController.getRandomNumber(range)
-    }
-
     @RequestMapping(path = arrayOf("/getDistribution"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getDistribution(@RequestParam(value = "range", required = false, defaultValue = "10") range: Int,
                         @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long): Map<Int, Long> {
