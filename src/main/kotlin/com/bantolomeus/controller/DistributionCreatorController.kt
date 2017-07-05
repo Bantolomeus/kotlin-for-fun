@@ -22,12 +22,26 @@ class DistributionCreatorController {
             @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long
     ): ResponseEntity<Map<String, Any>> {
 
+        val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
         val distributionModel = DistributionCreatorModel()
 
-        val response = mapOf( "distribution" to distributionModel.createDistribution(range, rangeBegin, rangeEnd, invocations))
+        val response = mapOf( "distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
+                              "probability" to distributionModel.getProbability(rangeCalculated, invocations))
 
 //        return distributionModel.createDistribution(rangeBegin, invocations)
         return ResponseEntity(response, HttpStatus.OK)
+    }
+
+    fun calculateRange(range: Int, rangeBegin: Int, rangeEnd: Int, invocations: Long): Int {
+
+        if ((rangeBegin != 0 || rangeEnd != 9) && rangeEnd > rangeBegin) {
+
+            return rangeEnd - rangeBegin
+        } else {
+
+            return range
+        }
+
     }
 
 }
