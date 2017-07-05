@@ -17,14 +17,9 @@ open class DistributionCreatorModel {
         }
 
         return distribution
-
-//        return getDistributionWithRangeAndInvocations(range, invocations)
     }
 
     fun getProbability(range: Int, invocations: Long): Double {
-
-//        val rangeAsDouble = range.toDouble()
-//        val invocationsAsDouble = invocations.toDouble()
 
         val factorOne = 1/range.toDouble()
         val probability = Math.pow(factorOne, invocations.toDouble())
