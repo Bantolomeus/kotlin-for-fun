@@ -31,7 +31,7 @@ class DistributionCreatorController {
                 "Date" to dateTimeFormatter.format(localDateTime))
 
 //        return distributionModel.createDistribution(rangeBegin, invocations)
-        return ResponseEntity(response, HttpStatus.ACCEPTED)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
 }
