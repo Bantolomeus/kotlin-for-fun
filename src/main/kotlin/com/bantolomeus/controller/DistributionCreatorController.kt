@@ -17,8 +17,8 @@ class DistributionCreatorController {
     @RequestMapping(path = arrayOf("/getDistribution"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getDistribution(
             @RequestParam(value = "rangeBegin", required = false, defaultValue = "0") rangeBegin: Int,
-            @RequestParam(value = "rangeBegin", required = false, defaultValue = "9") rangeEnd: Int,
-            @RequestParam(value = "rangeBegin", required = false, defaultValue = "10") range: Int,
+            @RequestParam(value = "rangeEnd", required = false, defaultValue = "9") rangeEnd: Int,
+            @RequestParam(value = "range", required = false, defaultValue = "10") range: Int,
             @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long
     ): ResponseEntity<Map<String, Any>> {
 
@@ -27,7 +27,7 @@ class DistributionCreatorController {
         val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
         val localDateTime = LocalDateTime.now()
 
-        val response = mapOf( "distribution" to distributionModel.createDistribution(range, 0, 9, invocations),
+        val response = mapOf( "distribution" to distributionModel.createDistribution(range, rangeBegin, rangeEnd, invocations),
                 "Date" to dateTimeFormatter.format(localDateTime))
 
 //        return distributionModel.createDistribution(rangeBegin, invocations)
