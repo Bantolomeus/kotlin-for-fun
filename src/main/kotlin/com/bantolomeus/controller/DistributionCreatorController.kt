@@ -24,11 +24,7 @@ class DistributionCreatorController {
 
         val distributionModel = DistributionCreatorModel()
 
-        val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
-        val localDateTime = LocalDateTime.now()
-
-        val response = mapOf( "distribution" to distributionModel.createDistribution(range, rangeBegin, rangeEnd, invocations),
-                "Date" to dateTimeFormatter.format(localDateTime))
+        val response = mapOf( "distribution" to distributionModel.createDistribution(range, rangeBegin, rangeEnd, invocations))
 
 //        return distributionModel.createDistribution(rangeBegin, invocations)
         return ResponseEntity(response, HttpStatus.OK)
