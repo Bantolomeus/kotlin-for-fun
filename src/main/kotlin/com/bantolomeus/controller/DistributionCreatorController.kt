@@ -1,22 +1,38 @@
 package com.bantolomeus.controller
 
 import com.bantolomeus.model.DistributionCreatorModel
+import com.fasterxml.jackson.databind.util.JSONPObject
+import com.fasterxml.jackson.databind.util.JSONWrappedObject
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @RestController
 class DistributionCreatorController {
 
     @RequestMapping(path = arrayOf("/getDistribution"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    fun getDistribution(@RequestParam(value = "range", required = false, defaultValue = "10") range: Int,
-                        @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long): Map<Int, Long> {
+    fun getDistribution(
+            @RequestParam(value = "range", required = false, defaultValue = "10") range: Int,
+            @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long
+    ): ResponseEntity<Map<String, Any>> {
 
         val distributionModel = DistributionCreatorModel()
 
-        return distributionModel.createDistribution(range, invocations)
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+        val localDateTime = LocalDateTime.now()
+
+        val response = mapOf( "distribution" to distributionModel.createDistribution(range, invocations),
+                "Date" to dateTimeFormatter.format(localDateTime))
+
+//        return distributionModel.createDistribution(range, invocations)
+        return ResponseEntity(response, HttpStatus.ACCEPTED)
     }
 
 }
