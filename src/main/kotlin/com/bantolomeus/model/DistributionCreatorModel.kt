@@ -27,7 +27,7 @@ open class DistributionCreatorModel {
 //        val invocationsAsDouble = invocations.toDouble()
 
         val factorOne = 1/range.toDouble()
-        val probability = factorOne * invocations.toDouble()
+        val probability = Math.pow(factorOne, invocations.toDouble())
 
         return probability
     }
