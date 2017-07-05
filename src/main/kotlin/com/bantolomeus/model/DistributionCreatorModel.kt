@@ -29,6 +29,10 @@ open class DistributionCreatorModel {
         val factorOne = 1/range.toDouble()
         val probability = Math.pow(factorOne, invocations.toDouble())
 
-        return probability
+        if (probability == 0.0) {
+            return Double.MIN_VALUE
+        } else {
+            return probability
+        }
     }
 }
