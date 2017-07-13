@@ -21,7 +21,7 @@ class InfoController constructor(
 
     @GetMapping("status")
     fun getStatus(): ResponseEntity<String> {
-        val httpStatus = applicationStatus.getHttpStatus();
+        val httpStatus = applicationStatus.getHttpStatus()
         return ResponseEntity(httpStatus.name, httpStatus)
     }
 }
