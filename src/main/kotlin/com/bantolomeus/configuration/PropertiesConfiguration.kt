@@ -5,9 +5,10 @@ import org.springframework.context.annotation.Configuration
 
 
 @Configuration
-@ConfigurationProperties(prefix = "info")
+@ConfigurationProperties
+//(prefix = "info")
 open class InfoConfiguration {
 
-    var build: Map<String, String> = mutableMapOf()
+    var buildVersion: String = ""
 
 }

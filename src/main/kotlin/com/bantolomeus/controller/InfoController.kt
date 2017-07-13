@@ -15,8 +15,8 @@ class InfoController constructor(
         private val infoConfiguration: InfoConfiguration
 ) {
     @GetMapping("version")
-    fun getVersion(): ResponseEntity<Map<String, String>> {
-        return ResponseEntity(infoConfiguration.build, HttpStatus.OK)
+    fun getVersion(): ResponseEntity<String> {
+        return ResponseEntity(infoConfiguration.buildVersion, HttpStatus.OK)
     }
 
     @GetMapping("status")
