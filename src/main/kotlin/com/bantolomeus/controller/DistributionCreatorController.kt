@@ -23,8 +23,8 @@ class DistributionCreatorController {
         val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
         val distributionModel = DistributionCreatorModel()
 
-        val response = mapOf( "distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
-                              "probability" to distributionModel.getProbability(rangeCalculated, invocations))
+        val response = mapOf("distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
+                "probability" to distributionModel.getProbability(rangeCalculated, invocations))
 
         return ResponseEntity(response, HttpStatus.OK)
     }

@@ -21,7 +21,7 @@ open class DistributionCreatorModel {
 
     fun getProbability(range: Int, invocations: Long): Double {
 
-        val factorOne = 1/range.toDouble()
+        val factorOne = 1 / range.toDouble()
         val probability = Math.pow(factorOne, invocations.toDouble())
 
         if (probability == 0.0) {

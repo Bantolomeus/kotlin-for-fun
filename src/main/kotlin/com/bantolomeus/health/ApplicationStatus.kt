@@ -13,7 +13,7 @@ open class ApplicationStatus(
         private val applicationContext: ApplicationContext
 ) {
 
-    fun getHttpStatus() : HttpStatus {
+    fun getHttpStatus(): HttpStatus {
         try {
             applicationContext.getBeansOfType(HealthIndicator::class.java).forEach {
                 if (it.value.health().status != Status.UP) {
