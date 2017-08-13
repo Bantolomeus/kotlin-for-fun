@@ -2,9 +2,9 @@ package com.bantolomeus.model
 
 import java.util.*
 
-class NormalDistribution : DistributionInterface {
+class UniformDistribution : DistributionInterface {
 
     override fun getRandomNumber(random: Random, range: Int): Int {
-        return random.nextGaussian().toInt() * range
+        return random.nextInt(range)
     }
 }

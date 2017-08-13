@@ -1,6 +1,9 @@
 package com.bantolomeus.controller
 
 import com.bantolomeus.model.DistributionCreatorModel
+import com.bantolomeus.model.DistributionInterface
+import com.bantolomeus.model.NormalDistribution
+import com.bantolomeus.model.UniformDistribution
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -14,6 +17,7 @@ class DistributionCreatorController {
 
     @RequestMapping(path = arrayOf("/getDistribution"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getDistribution(
+            @RequestParam(value = "distribution", required = false, defaultValue = "normal") distribution: String,
             @RequestParam(value = "rangeBegin", required = false, defaultValue = "0") rangeBegin: Int,
             @RequestParam(value = "rangeEnd", required = false, defaultValue = "9") rangeEnd: Int,
             @RequestParam(value = "range", required = false, defaultValue = "10") range: Int,
@@ -36,7 +40,13 @@ class DistributionCreatorController {
          */
 
         val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
-        val distributionModel = DistributionCreatorModel()
+        val distributionModel: DistributionInterface
+
+        if (distribution == "uniform") {
+            distributionModel = UniformDistribution()
+        } else {
+            distributionModel = NormalDistribution()
+        }
 
         val response = mapOf("distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
                 "probability" to distributionModel.getProbability(rangeCalculated, invocations))
