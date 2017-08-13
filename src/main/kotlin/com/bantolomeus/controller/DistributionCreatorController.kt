@@ -20,6 +20,21 @@ class DistributionCreatorController {
             @RequestParam(value = "invocations", required = false, defaultValue = "1000000") invocations: Long
     ): ResponseEntity<Map<String, Any>> {
 
+        /*
+        distribution parameter
+        gauss and standard distribution implementation
+        distribution interface
+
+        im code:
+         variable from type distribution interface
+
+         if parameter = gauss then gauss.distribution.impl
+
+         same for standard
+
+         execute getDistribution on interface variable
+         */
+
         val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
         val distributionModel = DistributionCreatorModel()
 
