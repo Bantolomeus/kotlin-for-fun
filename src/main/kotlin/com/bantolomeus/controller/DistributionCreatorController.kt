@@ -1,6 +1,5 @@
 package com.bantolomeus.controller
 
-import com.bantolomeus.model.DistributionCreatorModel
 import com.bantolomeus.model.DistributionInterface
 import com.bantolomeus.model.NormalDistribution
 import com.bantolomeus.model.UniformDistribution
