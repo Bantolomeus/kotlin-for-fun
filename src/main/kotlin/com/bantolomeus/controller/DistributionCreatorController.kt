@@ -24,12 +24,11 @@ class DistributionCreatorController {
     ): ResponseEntity<Map<String, Any>> {
 
         val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
-        val distributionModel: DistributionInterface
 
-        if (distribution == "uniform") {
-            distributionModel = UniformDistribution()
+        val distributionModel: DistributionInterface = if (distribution == "uniform") {
+            UniformDistribution()
         } else {
-            distributionModel = NormalDistribution()
+            NormalDistribution()
         }
 
         val response = mapOf("distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
@@ -40,12 +39,10 @@ class DistributionCreatorController {
 
     fun calculateRange(range: Int, rangeBegin: Int, rangeEnd: Int, invocations: Long): Int {
 
-        if ((rangeBegin != 0 || rangeEnd != 9) && rangeEnd > rangeBegin) {
-
-            return rangeEnd - rangeBegin
+        return if ((rangeBegin != 0 || rangeEnd != 9) && rangeEnd > rangeBegin) {
+            rangeEnd - rangeBegin
         } else {
-
-            return range
+            range
         }
     }
 
