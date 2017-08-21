@@ -1,10 +1,7 @@
 package com.bantolomeus.service
 
 import com.bantolomeus.model.Statistic
-import com.bantolomeus.model.UniformDistribution
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
 
 
 @Service
