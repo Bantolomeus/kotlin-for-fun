@@ -1,7 +1,10 @@
 package com.bantolomeus.controller
 
+import com.bantolomeus.messageBus.MessageBus
 import com.bantolomeus.model.DistributionInterface
 import com.bantolomeus.model.NormalDistribution
+import com.bantolomeus.model.SubjectInterface
+import com.bantolomeus.model.SubscriptionEnum
 import com.bantolomeus.model.UniformDistribution
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class DistributionCreatorController {
+class DistributionCreatorController(private var messageBus: MessageBus): SubjectInterface {
 
     @RequestMapping(path = arrayOf("/getDistribution"), method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getDistribution(
@@ -25,10 +28,14 @@ class DistributionCreatorController {
 
         val rangeCalculated = calculateRange(range, rangeBegin, rangeEnd, invocations)
 
-        val distributionModel: DistributionInterface = if (distribution == "uniform") {
-            UniformDistribution()
+        val distributionModel: DistributionInterface
+
+        if (distribution == "uniform") {
+            distributionModel = UniformDistribution()
+            sendUpdate(SubscriptionEnum.UNIFORM_DISTRIBUTION)
         } else {
-            NormalDistribution()
+            distributionModel = NormalDistribution()
+            sendUpdate(SubscriptionEnum.NORMAL_DISTRIBUTION)
         }
 
         val response = mapOf("distribution" to distributionModel.createDistribution(rangeCalculated, invocations),
@@ -44,6 +51,10 @@ class DistributionCreatorController {
         } else {
             range
         }
+    }
+
+    override fun sendUpdate(updateMessage: SubscriptionEnum) {
+        messageBus.update(updateMessage)
     }
 
 }
