@@ -1,15 +1,23 @@
 package com.bantolomeus.model
 
+import org.springframework.stereotype.Service
+
+@Service
 class Statistic {
-    var normalDistributionCounter: Int = 0
-    var uniformDistributionCounter: Int = 0
+    final var normalDistributionCounter: Int
+    final var uniformDistributionCounter: Int
+
+    init {
+        normalDistributionCounter = 0
+        uniformDistributionCounter = 0
+    }
 
     fun normalDistributionCalled() {
-        normalDistributionCounter.inc()
+        normalDistributionCounter++
     }
 
     fun uniformDistributionCalled() {
-        uniformDistributionCounter.inc()
+        uniformDistributionCounter++
     }
 
 }

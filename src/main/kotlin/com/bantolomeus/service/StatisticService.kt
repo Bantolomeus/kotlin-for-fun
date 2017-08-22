@@ -1,11 +1,11 @@
 package com.bantolomeus.service
 
+import com.bantolomeus.model.ObserverInterface
 import com.bantolomeus.model.Statistic
 import org.springframework.stereotype.Service
 
-
 @Service
-class StatisticService (private val statistic : Statistic){
+class StatisticService (private val statistic : Statistic): ObserverInterface {
 
     fun getUniformDistributionCalls(): Int{
         return statistic.uniformDistributionCounter
