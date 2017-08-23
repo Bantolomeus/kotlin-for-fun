@@ -2,7 +2,7 @@ package com.bantolomeus.model
 
 interface ObserverInterface {
 
-    // implement unsubscribe
+    fun unsubscribe(observer: ObserverInterface)
 
 
     fun subscribe(observer: ObserverInterface)

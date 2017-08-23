@@ -18,9 +18,14 @@ class StatisticController (private val statisticService: StatisticService) {
 
         return ResponseEntity(response, HttpStatus.OK)
     }
-// , method = arrayOf(RequestMethod.GET), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE)
+
     @RequestMapping(path = arrayOf("/statistic/subscribe"))
-    fun setSubscription() {
+    fun subscribe() {
         statisticService.subscribe(statisticService)
+    }
+
+    @RequestMapping(path = arrayOf("/statistic/unsubscribe"))
+    fun unsubscribe() {
+        statisticService.unsubscribe(statisticService)
     }
 }

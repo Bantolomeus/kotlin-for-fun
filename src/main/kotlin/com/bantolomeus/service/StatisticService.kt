@@ -29,6 +29,10 @@ class StatisticService (private val statistic : Statistic, private val messageBu
         messageBus.subscriptionIncoming(observer)
     }
 
+    override fun unsubscribe(observer: ObserverInterface) {
+        messageBus.unsubscribe(observer)
+    }
+
     override fun update(message: SubscriptionEnum) {
         if (message == SubscriptionEnum.UNIFORM_DISTRIBUTION) {
             uniformDistributionCalled()

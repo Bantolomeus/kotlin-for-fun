@@ -24,6 +24,10 @@ class MessageBus {
         observers.add(observer)
     }
 
-
+    fun unsubscribe(observer: ObserverInterface) {
+        observers
+                .filter { it == observer }
+                .forEach { observers.remove(it) }
+    }
 
 }
