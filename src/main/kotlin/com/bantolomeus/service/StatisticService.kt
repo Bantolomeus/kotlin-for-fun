@@ -41,7 +41,3 @@ class StatisticService (private val statistic : Statistic, private val messageBu
         }
     }
 }
-
-/*
-messagebus.update > statisticService.update > statistic.distributionCalled > distribution++
- */
