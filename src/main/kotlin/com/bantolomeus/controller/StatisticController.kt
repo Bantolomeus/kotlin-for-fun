@@ -21,6 +21,7 @@ class StatisticController (private val statisticService: StatisticService) {
 
     @RequestMapping(path = arrayOf("/statistic/subscribe"))
     fun subscribe() {
+//        messageBus.subscribe(statisticService)
         statisticService.subscribe(statisticService)
     }
 
