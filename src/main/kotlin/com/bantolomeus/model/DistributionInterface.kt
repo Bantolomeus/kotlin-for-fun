@@ -3,6 +3,7 @@ package com.bantolomeus.model
 import java.util.*
 
 interface DistributionInterface {
+    val distributionType: SubscriptionEnum
 
     fun createDistribution(range: Int, invocations: Long): Map<Int, Long> {
         val distribution = HashMap<Int, Long>()
@@ -25,6 +26,10 @@ interface DistributionInterface {
         } else {
             probability
         }
+    }
+
+    fun getType(): SubscriptionEnum {
+        return this.distributionType
     }
 
     fun getRandomNumber(random: Random, range: Int): Int
