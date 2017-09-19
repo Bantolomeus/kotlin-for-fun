@@ -23,7 +23,7 @@ class CalculatorController(private val calculatorService: CalculatorService) {
         return ResponseEntity("last input: $input", HttpStatus.OK)
     }
 
-    @RequestMapping(path = arrayOf("/calculator/chain"), method = arrayOf(RequestMethod.GET),
+    @RequestMapping(path = arrayOf("/calculator/execute"), method = arrayOf(RequestMethod.GET),
                     produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
 
     fun getCalculatorData(): ResponseEntity<String> {

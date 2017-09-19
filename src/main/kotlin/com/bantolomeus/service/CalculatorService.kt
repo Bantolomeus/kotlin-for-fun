@@ -2,11 +2,10 @@ package com.bantolomeus.service
 
 import com.bantolomeus.commandPattern.CommandFactory
 import com.bantolomeus.commandPattern.Receiver
-import com.bantolomeus.model.Calculator
 import org.springframework.stereotype.Service
 
 @Service
-class CalculatorService(private val calculator: Calculator, private val receiver: Receiver) {
+class CalculatorService(private val receiver: Receiver) {
 
     fun addCommand(command: String) {
         if (command == "+" || command == "-") {
@@ -30,8 +29,15 @@ class CalculatorService(private val calculator: Calculator, private val receiver
                 }
             }
         } else {
+            emptyLists()
             return "please provide two numbers and an operation(+ or -)"
         }
+        emptyLists()
         return result
+    }
+
+    private fun emptyLists() {
+        receiver.commands = mutableListOf()
+        receiver.numbers = mutableListOf()
     }
 }
