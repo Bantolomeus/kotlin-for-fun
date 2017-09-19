@@ -1,14 +1,11 @@
 package com.bantolomeus
 
-import com.bantolomeus.messageBus.MessageBus
 import com.bantolomeus.model.DistributionInterface
 import com.bantolomeus.model.NormalDistribution
-import com.bantolomeus.model.SubscriptionEnum
 import com.bantolomeus.model.UniformDistribution
 
-class DistributionFactory(private val messageBus: MessageBus) {
+class DistributionFactory {
 
-    // make it static
     companion object {
         fun createDistribution(distribution: String): DistributionInterface {
             if (distribution == "uniform") {
