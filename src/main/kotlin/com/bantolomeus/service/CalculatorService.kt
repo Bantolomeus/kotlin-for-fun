@@ -1,21 +1,37 @@
 package com.bantolomeus.service
 
+import com.bantolomeus.commandPattern.CommandFactory
+import com.bantolomeus.commandPattern.Receiver
 import com.bantolomeus.model.Calculator
 import org.springframework.stereotype.Service
 
 @Service
-class CalculatorService(private val calculator: Calculator) {
+class CalculatorService(private val calculator: Calculator, private val receiver: Receiver) {
 
     fun addCommand(command: String) {
-        calculator.command.add(command)
+        if (command == "+" || command == "-") {
+            val concreteCommand = CommandFactory.createCommand(command, receiver)
+            concreteCommand.chain(command)
+        } else {
+            receiver.numbers.add(command)
+        }
     }
 
-    // implement logic for processing
     fun executeCommand(): String {
-        val string = StringBuilder()
-        for (entry in calculator.command) {
-            string.append(entry)
+        var result = ""
+        if (receiver.numbers.size == 2) {
+            for (command in receiver.commands) {
+                if (command == "+") {
+                    val intResult = receiver.numbers[0].toInt() + receiver.numbers[1].toInt()
+                    result = intResult.toString()
+                } else if(command == "-") {
+                    val intResult = receiver.numbers[0].toInt() - receiver.numbers[1].toInt()
+                    result = intResult.toString()
+                }
+            }
+        } else {
+            return "please provide two numbers and an operation(+ or -)"
         }
-        return string.toString()
+        return result
     }
 }
