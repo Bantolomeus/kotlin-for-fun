@@ -1,8 +1,12 @@
 package com.bantolomeus.commandPattern
 
-class Multiply(private val receiver: Receiver) : CommandInterface {
+class Multiply(override val receiver: Receiver) : CommandInterface {
 
-    override fun chain(command: String) {
-        receiver.chainCommand(command)
+    override fun chain(input: String) {
+        receiver.chain(input)
+    }
+
+    override fun execute(numbers: MutableList<Int>): Int {
+        return numbers[0] * numbers[1]
     }
 }

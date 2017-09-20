@@ -8,39 +8,47 @@ import org.springframework.stereotype.Service
 class CalculatorService(private val receiver: Receiver) {
 
     fun addCommand(command: String) {
-        if (command == "+" || command == "-" || command == "*") {
             val concreteCommand = CommandFactory.createCommand(command, receiver)
             concreteCommand.chain(command)
-        } else {
-            receiver.numbers.add(command)
-        }
     }
 
     fun executeCommand(): String {
-        var result = ""
-        if (receiver.numbers.size == 2) {
+        var result = "Please provide two numbers and one command(+, -, *)"
+        val numbers = mutableListOf<Int>()
+
+        for (command in receiver.commands) {
+            val numberOrNot = checkForNumber(command)
+
+            if (numberOrNot.containsKey(true)) {
+                numbers.add(numberOrNot.getValue(true))
+            }
+        }
+
+        if (numbers.size == 2) {
             for (command in receiver.commands) {
-                if (command == "+") {
-                    val intResult = receiver.numbers[0].toInt() + receiver.numbers[1].toInt()
-                    result = intResult.toString()
-                } else if(command == "-") {
-                    val intResult = receiver.numbers[0].toInt() - receiver.numbers[1].toInt()
-                    result = intResult.toString()
-                } else if(command == "*") {
-                    val intResult = receiver.numbers[0].toInt() * receiver.numbers[1].toInt()
-                    result = intResult.toString()
+                if (checkForNumber(command).containsKey(false)) {
+                    result = CommandFactory.createCommand(command, receiver).execute(numbers).toString()
                 }
             }
         } else {
-            emptyLists()
-            return "please provide two numbers and an operation(+, -, *)"
+            emptyCommands()
+            return result
         }
-        emptyLists()
+
+        emptyCommands()
         return result
     }
 
-    private fun emptyLists() {
+    private fun checkForNumber(command: String): MutableMap<Boolean, Int> {
+        return try {
+            command.toInt()
+            mutableMapOf(true to command.toInt() )
+        } catch (e: NumberFormatException) {
+            mutableMapOf(false to 0)
+        }
+    }
+
+    private fun emptyCommands() {
         receiver.commands = mutableListOf()
-        receiver.numbers = mutableListOf()
     }
 }

@@ -2,6 +2,11 @@ package com.bantolomeus.commandPattern
 
 interface CommandInterface {
 
-    fun chain(command: String)
+    val receiver: Receiver
 
+    fun chain(input: String) {
+        receiver.chain(input)
+    }
+
+    fun execute(numbers: MutableList<Int>): Int
 }
