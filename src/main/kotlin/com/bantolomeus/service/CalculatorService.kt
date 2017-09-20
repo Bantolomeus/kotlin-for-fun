@@ -33,7 +33,7 @@ class CalculatorService(private val receiver: Receiver) {
             }
         } else {
             emptyLists()
-            return "please provide two numbers and an operation(+ or -)"
+            return "please provide two numbers and an operation(+, -, *)"
         }
         emptyLists()
         return result
