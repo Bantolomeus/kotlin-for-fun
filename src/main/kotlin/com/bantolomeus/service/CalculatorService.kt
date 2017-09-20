@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class CalculatorService(private val receiver: Receiver) {
 
     fun addCommand(command: String) {
-        if (command == "+" || command == "-") {
+        if (command == "+" || command == "-" || command == "*") {
             val concreteCommand = CommandFactory.createCommand(command, receiver)
             concreteCommand.chain(command)
         } else {
@@ -25,6 +25,9 @@ class CalculatorService(private val receiver: Receiver) {
                     result = intResult.toString()
                 } else if(command == "-") {
                     val intResult = receiver.numbers[0].toInt() - receiver.numbers[1].toInt()
+                    result = intResult.toString()
+                } else if(command == "*") {
+                    val intResult = receiver.numbers[0].toInt() * receiver.numbers[1].toInt()
                     result = intResult.toString()
                 }
             }
